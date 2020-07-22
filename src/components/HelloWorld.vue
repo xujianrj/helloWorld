@@ -2,7 +2,8 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
-      this is a sample from XuJian .
+      <span class="header">{{ title }}</span>
+      <span class="header">{{ getGenderText }}</span>
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener"
         >vue-cli documentation</a
       >.
@@ -106,6 +107,37 @@ export default {
   name: "HelloWorld",
   props: {
     msg: String
+  },
+  data() {
+    return {
+      title: "this is not test",
+      gender: 0
+    };
+  },
+  // watch: {
+  //   // 如果 `question` 发生改变，这个函数就会运行
+  //   gender: function (gender, newGender) {
+  //     if(newGender===1){
+  //       //generate male avatar.
+  //     }
+  //   }
+  // },
+  computed: {
+    // 计算属性的 getter
+    getGenderText: function() {
+      // `this` 指向 vm 实例
+      return this.gender === 1 ? "男" : "女";
+    }
+  },
+  methods: {
+    loadDataFromServer() {
+      this.gender = 0;
+      //
+      return "this is server data";
+    }
+  },
+  mounted() {
+    this.loadDataFromServer();
   }
 };
 </script>
